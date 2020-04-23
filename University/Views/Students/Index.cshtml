@@ -1,0 +1,83 @@
+﻿@model University.ViewModels.StudentNameIndexViewModel;
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<form asp-controller="Students" asp-action="Index" method="get">
+    <p>
+        <select asp-for="studentIndex" asp-items="Model.indexVM">
+            <option value="">Index</option>
+        </select>
+        Name: <input type="text" asp-for="searchString" />
+        <input type="submit" value="Filter" />
+        <a asp-action="Index">Back to Full List</a>
+    </p>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.studentVM[0].studentID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.studentVM[0].firstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.studentVM[0].lastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.studentVM[0].enrollmentDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.studentVM[0].acquiredCredits)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.studentVM[0].currentSemestar)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.studentVM[0].educationLevel)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.studentVM) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.studentID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.firstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.lastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.enrollmentDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.acquiredCredits)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.currentSemestar)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.educationLevel)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
