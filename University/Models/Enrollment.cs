@@ -54,8 +54,11 @@ namespace University.Models
         [Display(Name = "Finnish Date")]
         public DateTime finnishDate { get; set; }
 
+
+        [Display(Name = "Student")]
         [ForeignKey("studentID")]
         public Student student { get; set; }
+        [Display(Name = "Course")]
         [ForeignKey("courseID")]
         public Course course { get; set; }
     }
