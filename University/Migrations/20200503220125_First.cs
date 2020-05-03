@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace University.Migrations
 {
-    public partial class CourseStudentTeacher : Migration
+    public partial class First : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -16,9 +16,9 @@ namespace University.Migrations
                     studentID = table.Column<string>(maxLength: 10, nullable: false),
                     firstName = table.Column<string>(maxLength: 50, nullable: false),
                     lastName = table.Column<string>(maxLength: 50, nullable: false),
-                    enrollmentDate = table.Column<DateTime>(nullable: false),
-                    acquiredCredits = table.Column<int>(nullable: false),
-                    currentSemestar = table.Column<int>(nullable: false),
+                    enrollmentDate = table.Column<DateTime>(nullable: true),
+                    acquiredCredits = table.Column<int>(nullable: true),
+                    currentSemestar = table.Column<int>(nullable: true),
                     educationLevel = table.Column<string>(maxLength: 25, nullable: true)
                 },
                 constraints: table =>
@@ -37,7 +37,7 @@ namespace University.Migrations
                     degree = table.Column<string>(maxLength: 50, nullable: true),
                     academicRank = table.Column<string>(maxLength: 25, nullable: true),
                     officeNumber = table.Column<string>(maxLength: 10, nullable: true),
-                    hireDate = table.Column<DateTime>(nullable: false)
+                    hireDate = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -81,15 +81,15 @@ namespace University.Migrations
                     courseID = table.Column<int>(nullable: false),
                     studentID = table.Column<long>(nullable: false),
                     semester = table.Column<string>(maxLength: 10, nullable: true),
-                    year = table.Column<int>(nullable: false),
-                    grade = table.Column<int>(nullable: false),
+                    year = table.Column<int>(nullable: true),
+                    grade = table.Column<int>(nullable: true),
                     seminalURL = table.Column<string>(maxLength: 255, nullable: true),
                     projectURL = table.Column<string>(maxLength: 255, nullable: true),
-                    examPoints = table.Column<int>(nullable: false),
-                    seminalPoints = table.Column<int>(nullable: false),
-                    projectPoints = table.Column<int>(nullable: false),
-                    additionalPoints = table.Column<int>(nullable: false),
-                    finnishDate = table.Column<DateTime>(nullable: false)
+                    examPoints = table.Column<int>(nullable: true),
+                    seminalPoints = table.Column<int>(nullable: true),
+                    projectPoints = table.Column<int>(nullable: true),
+                    additionalPoints = table.Column<int>(nullable: true),
+                    finnishDate = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {

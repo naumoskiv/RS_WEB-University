@@ -30,17 +30,17 @@ namespace University.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Enrollment Date")]
-        public DateTime enrollmentDate { get; set; }
+        public DateTime? enrollmentDate { get; set; }
 
         [Display(Name = "Acquired Credits")]
-        public int acquiredCredits { get; set; }
+        public int? acquiredCredits { get; set; }
 
         [Display(Name = "Current Semester")]
-        public int currentSemestar { get; set; }
+        public int? currentSemestar { get; set; }
 
         [StringLength(25)]
         [Display(Name = "Education Level")]
-        public string educationLevel { get; set; }
+        public string? educationLevel { get; set; }
 
         [Display(Name = "Full Name")]
         public string fullName

@@ -20,14 +20,14 @@ namespace University.Data
 
             var students = new Student[]
             {
-                new Student{ID=1,   studentID="1982017",    firstName="Carson",     lastName="Alexander",   enrollmentDate=DateTime.Parse("2005-09-01")},
-                new Student{ID=2,   studentID="1222017",    firstName="Meredith",   lastName="Alonso",      enrollmentDate=DateTime.Parse("2002-09-01")},
-                new Student{ID=3,   studentID="1892017",    firstName="Arturo",     lastName="Anand",       enrollmentDate=DateTime.Parse("2003-09-01")},
-                new Student{ID=4,   studentID="802017",     firstName="Gytis",      lastName="Barzdukas",   enrollmentDate=DateTime.Parse("2002-09-01")},
-                new Student{ID=5,   studentID="182018",     firstName="Yan",        lastName="Li",          enrollmentDate=DateTime.Parse("2002-09-01")},
-                new Student{ID=6,   studentID="12018",      firstName="Peggy",      lastName="Justice",     enrollmentDate=DateTime.Parse("2001-09-01")},
-                new Student{ID=7,   studentID="1902019",    firstName="Laura",      lastName="Norman",      enrollmentDate=DateTime.Parse("2003-09-01")},
-                new Student{ID=8,   studentID="3042017",    firstName="Nino",       lastName="Olivetto",    enrollmentDate=DateTime.Parse("2005-09-01")}
+                new Student{studentID="1982017",    firstName="Carson",     lastName="Alexander",   enrollmentDate=DateTime.Parse("2005-09-01")},
+                new Student{studentID="1222017",    firstName="Meredith",   lastName="Alonso",      enrollmentDate=DateTime.Parse("2002-09-01")},
+                new Student{studentID="1892017",    firstName="Arturo",     lastName="Anand",       enrollmentDate=DateTime.Parse("2003-09-01")},
+                new Student{studentID="802017",     firstName="Gytis",      lastName="Barzdukas",   enrollmentDate=DateTime.Parse("2002-09-01")},
+                new Student{studentID="182018",     firstName="Yan",        lastName="Li",          enrollmentDate=DateTime.Parse("2002-09-01")},
+                new Student{studentID="12018",      firstName="Peggy",      lastName="Justice",     enrollmentDate=DateTime.Parse("2001-09-01")},
+                new Student{studentID="1902019",    firstName="Laura",      lastName="Norman",      enrollmentDate=DateTime.Parse("2003-09-01")},
+                new Student{studentID="3042017",    firstName="Nino",       lastName="Olivetto",    enrollmentDate=DateTime.Parse("2005-09-01")}
             };
             foreach (Student s in students)
             {
@@ -94,10 +94,10 @@ namespace University.Data
 
             var teachers = new Teacher[]
             {
-                new Teacher{ID=1,   firstName="Kim",  lastName="Abercrombie"},
-                new Teacher{ID=2,   firstName="Roger",  lastName="Hauri"},
-                new Teacher{ID=3,   firstName="Candace",  lastName="Kapoor"},
-                new Teacher{ID=4,   firstName="Roger",  lastName="Zheng"}
+                new Teacher{firstName="Kim",  lastName="Abercrombie"},
+                new Teacher{firstName="Roger",  lastName="Hauri"},
+                new Teacher{firstName="Candace",  lastName="Kapoor"},
+                new Teacher{firstName="Roger",  lastName="Zheng"}
             };
             foreach (Teacher t in teachers)
             {

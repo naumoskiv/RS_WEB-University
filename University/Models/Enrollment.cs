@@ -19,47 +19,47 @@ namespace University.Models
 
         [StringLength(10)]
         [Display(Name = "Semester")]
-        public string semester { get; set; }
+        public string? semester { get; set; }
 
         [Display(Name = "Year")]
-        public int year { get; set; }
+        public int? year { get; set; }
 
         [Display(Name = "Grade")]
-        public int grade { get; set; }
+        public int? grade { get; set; }
 
         [Url]
         [StringLength(255)]
         [Display(Name = "Seminal URL")]
-        public string seminalURL { get; set; }
+        public string? seminalURL { get; set; }
 
         [Url]
         [StringLength(255)]
         [Display(Name = "Project URL")]
-        public string projectURL { get; set; }
+        public string? projectURL { get; set; }
         
         [Display(Name = "Exam Points")]
-        public int examPoints { get; set; }
+        public int? examPoints { get; set; }
         
         [Display(Name = "Seminal Points")]
-        public int seminalPoints { get; set; }
+        public int? seminalPoints { get; set; }
 
         [Display(Name = "Project Points")]
-        public int projectPoints { get; set; }
+        public int? projectPoints { get; set; }
 
         [Display(Name = "Additional Points")]
-        public int additionalPoints { get; set; }
+        public int? additionalPoints { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Finnish Date")]
-        public DateTime finnishDate { get; set; }
+        public DateTime? finnishDate { get; set; }
 
 
         [Display(Name = "Student")]
         [ForeignKey("studentID")]
-        public Student student { get; set; }
+        public Student? student { get; set; }
         [Display(Name = "Course")]
         [ForeignKey("courseID")]
-        public Course course { get; set; }
+        public Course? course { get; set; }
     }
 }

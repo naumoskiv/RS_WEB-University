@@ -10,8 +10,8 @@ using University.Data;
 namespace University.Migrations
 {
     [DbContext(typeof(UniversityContext))]
-    [Migration("20200422105333_CourseStudentTeacher")]
-    partial class CourseStudentTeacher
+    [Migration("20200503220125_First")]
+    partial class First
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -67,22 +67,22 @@ namespace University.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("additionalPoints")
+                    b.Property<int?>("additionalPoints")
                         .HasColumnType("int");
 
                     b.Property<int>("courseID")
                         .HasColumnType("int");
 
-                    b.Property<int>("examPoints")
+                    b.Property<int?>("examPoints")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("finnishDate")
+                    b.Property<DateTime?>("finnishDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("grade")
+                    b.Property<int?>("grade")
                         .HasColumnType("int");
 
-                    b.Property<int>("projectPoints")
+                    b.Property<int?>("projectPoints")
                         .HasColumnType("int");
 
                     b.Property<string>("projectURL")
@@ -93,7 +93,7 @@ namespace University.Migrations
                         .HasColumnType("nvarchar(10)")
                         .HasMaxLength(10);
 
-                    b.Property<int>("seminalPoints")
+                    b.Property<int?>("seminalPoints")
                         .HasColumnType("int");
 
                     b.Property<string>("seminalURL")
@@ -103,7 +103,7 @@ namespace University.Migrations
                     b.Property<long>("studentID")
                         .HasColumnType("bigint");
 
-                    b.Property<int>("year")
+                    b.Property<int?>("year")
                         .HasColumnType("int");
 
                     b.HasKey("ID");
@@ -122,17 +122,17 @@ namespace University.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("acquiredCredits")
+                    b.Property<int?>("acquiredCredits")
                         .HasColumnType("int");
 
-                    b.Property<int>("currentSemestar")
+                    b.Property<int?>("currentSemestar")
                         .HasColumnType("int");
 
                     b.Property<string>("educationLevel")
                         .HasColumnType("nvarchar(25)")
                         .HasMaxLength(25);
 
-                    b.Property<DateTime>("enrollmentDate")
+                    b.Property<DateTime?>("enrollmentDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("firstName")
@@ -175,7 +175,7 @@ namespace University.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
-                    b.Property<DateTime>("hireDate")
+                    b.Property<DateTime?>("hireDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("lastName")

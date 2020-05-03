@@ -24,20 +24,20 @@ namespace University.Models
 
         [StringLength(50)]
         [Display(Name = "Degree")]
-        public string degree { get; set; }
+        public string? degree { get; set; }
 
         [StringLength(25)]
         [Display(Name = "Academic Rank")]
-        public string academicRank { get; set; }
+        public string? academicRank { get; set; }
 
         [StringLength(10)]
         [Display(Name = "Office Number")]
-        public string officeNumber { get; set; }
+        public string? officeNumber { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Hire Date")]
-        public DateTime hireDate { get; set; }
+        public DateTime? hireDate { get; set; }
 
         [Display(Name = "Full Name")]
         public string fullName
