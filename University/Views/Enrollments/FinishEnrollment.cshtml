@@ -1,0 +1,50 @@
+﻿@model University.Models.Enrollment
+
+@{
+    ViewData["Title"] = "FinishEnrollment";
+}
+
+<h1>Finish the Enrollment</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="FinishEnrollment">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ID" />
+            <div class="form-group">
+                <label asp-for="courseID" class="control-label"></label>
+                <select asp-for="courseID" class="form-control" asp-items="ViewBag.courseID"></select>
+                <span asp-validation-for="courseID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="studentID" class="control-label"></label>
+                <select asp-for="studentID" class="form-control" asp-items="ViewBag.studentID"></select>
+                <span asp-validation-for="studentID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="semester" class="control-label"></label>
+                <input asp-for="semester" class="form-control" />
+                <span asp-validation-for="semester" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="year" class="control-label"></label>
+                <input asp-for="year" class="form-control" />
+                <span asp-validation-for="year" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="finnishDate" class="control-label"></label>
+                <input asp-for="finnishDate" class="form-control" />
+                <span asp-validation-for="finnishDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="EnrollmentList">Back to List</a>
+</div>
+

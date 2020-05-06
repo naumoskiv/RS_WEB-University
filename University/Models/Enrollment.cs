@@ -51,7 +51,7 @@ namespace University.Models
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        [Display(Name = "Finnish Date")]
+        [Display(Name = "Finish Date")]
         public DateTime? finnishDate { get; set; }
 
 

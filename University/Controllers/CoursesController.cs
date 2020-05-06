@@ -213,6 +213,37 @@ namespace University.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public async Task<IActionResult> CourseList()
+        {
+            var universityContext = _context.Course.Include(c => c.firstTeacher).Include(c => c.secondTeacher)
+                .Include(c => c.Enrollments).ThenInclude(e => e.student);
+            return View(await universityContext.ToListAsync());
+        }
+
+        public async Task<IActionResult> TeacherCourseView(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var course = await _context.Course
+                .Include(c => c.firstTeacher)
+                .Include(c => c.secondTeacher)
+                .Include(c => c.Enrollments)
+                .ThenInclude(e => e.student)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(m => m.ID == id);
+
+            if (course == null)
+            {
+                return NotFound();
+            }
+
+            return View(course);
+        }
+
+
         private bool CourseExists(int id)
         {
             return _context.Course.Any(e => e.ID == id);

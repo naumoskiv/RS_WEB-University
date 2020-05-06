@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -175,6 +176,33 @@ namespace University.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+        public async Task<IActionResult> TeacherList()
+        {
+            var universityContext = _context.Teacher.Include(t => t.firstCourses).Include(t => t.secondCourses);
+            return View(await universityContext.ToListAsync());
+        }
+
+        public async Task<IActionResult> TeacherViewDetails(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var teacher = await _context.Teacher
+                .Include(t => t.firstCourses)
+                .Include(t => t.secondCourses)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(m => m.ID == id);
+
+            if (teacher == null)
+            {
+                return NotFound();
+            }
+
+            return View(teacher);
+        }
+
 
         private bool TeacherExists(int id)
         {

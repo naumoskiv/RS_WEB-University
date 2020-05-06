@@ -170,6 +170,39 @@ namespace University.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        // GET: Students/StudentList
+        public async Task<IActionResult> StudentList()
+        {
+            var universityContext = _context.Student.Include(s => s.Enrollments).ThenInclude(e => e.course);
+            return View(await universityContext.ToListAsync());
+        }
+
+
+        // GET: Students/StudentViewDetails/5
+        public async Task<IActionResult> StudentViewDetails(long? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var student = await _context.Student
+            .Include(s => s.Enrollments)
+            .ThenInclude(e => e.course)
+            .AsNoTracking()
+            .FirstOrDefaultAsync(m => m.ID == id);
+
+            if (student == null)
+            {
+                return NotFound();
+            }
+
+            return View(student);
+        }
+
+
+
+
         private bool StudentExists(long id)
         {
             return _context.Student.Any(e => e.ID == id);

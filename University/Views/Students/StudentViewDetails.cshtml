@@ -1,0 +1,96 @@
+﻿@model University.Models.Student
+
+@{
+    ViewData["Title"] = "Student Details";
+}
+
+<h1>Student</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.studentID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.studentID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.firstName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.firstName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.lastName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.lastName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.enrollmentDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.enrollmentDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.acquiredCredits)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.acquiredCredits)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.currentSemestar)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.currentSemestar)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.educationLevel)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.educationLevel)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Enrollments)
+        </dt>
+        <dd class="col-sm-10">
+            <table class="table">
+                <tr>
+                    <th>Course Title</th>
+                    <th>Grade</th>
+                    <th>Semester</th>
+                    <th>Project URL</th>
+                    <th>Seminal URL</th>
+                </tr>
+                @foreach (var item in Model.Enrollments)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.course.title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.grade)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.semester)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.projectURL)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.seminalURL)
+                        </td>
+                        <td>
+                            <a asp-controller="Enrollments" asp-action="StudentEdit" asp-route-id="@item.ID">Upload URL</a>
+                        </td>
+                        <td>
+                            <a asp-controller="Enrollments" asp-action="StudentViewEnrollment" asp-route-id="@item.ID">Details</a>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </dd>
+    </dl>
+</div>
