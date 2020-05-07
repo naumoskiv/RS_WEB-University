@@ -1,13 +1,14 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using University.Models;
 
-namespace University.Models
+namespace University.ViewModels
 {
-    public class Student
+    public class StudentCreateViewModel
     {
         [Required]
         public Int64 ID { get; set; }
@@ -43,7 +44,7 @@ namespace University.Models
         public string? educationLevel { get; set; }
 
         [Display(Name = "Profile Picture")]
-        public string? profilePicture { get; set; }
+        public IFormFile? Picture { get; set; }
 
         [Display(Name = "Full Name")]
         public string fullName

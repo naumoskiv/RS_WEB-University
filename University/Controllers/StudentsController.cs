@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -14,10 +17,12 @@ namespace University.Controllers
     public class StudentsController : Controller
     {
         private readonly UniversityContext _context;
+        private readonly IHostingEnvironment webHostingEnvironment;
 
-        public StudentsController(UniversityContext context)
+        public StudentsController(UniversityContext context, IHostingEnvironment hostingEnvironment)
         {
             _context = context;
+            webHostingEnvironment = hostingEnvironment;
         }
 
         // GET: Students
@@ -79,15 +84,47 @@ namespace University.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,studentID,firstName,lastName,enrollmentDate,acquiredCredits,currentSemestar,educationLevel")] Student student)
+        public async Task<IActionResult> Create(StudentCreateViewModel model)
         {
             if (ModelState.IsValid)
             {
+                string uniqueFileName = UploadedFile(model);
+
+                Student student = new Student
+                {
+                    ID = model.ID,
+                    studentID = model.studentID,
+                    firstName = model.firstName,
+                    lastName = model.lastName,
+                    enrollmentDate = model.enrollmentDate,
+                    acquiredCredits = model.acquiredCredits,
+                    currentSemestar = model.currentSemestar,
+                    educationLevel = model.educationLevel,
+                    profilePicture = uniqueFileName
+                };
+
                 _context.Add(student);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Details", new { ID = student.ID });
             }
-            return View(student);
+            return View();
+        }
+
+        private string UploadedFile(StudentCreateViewModel model)
+        {
+            string uniqueFileName = null;
+
+            if (model.Picture != null)
+            {
+                string uploadsFolder = Path.Combine(webHostingEnvironment.WebRootPath, "studentImages");
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(model.Picture.FileName);
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    model.Picture.CopyTo(fileStream);
+                }
+            }
+            return uniqueFileName;
         }
 
         // GET: Students/Edit/5
@@ -111,12 +148,15 @@ namespace University.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("ID,studentID,firstName,lastName,enrollmentDate,acquiredCredits,currentSemestar,educationLevel")] Student student)
+        public async Task<IActionResult> Edit(long id, IFormFile imageUrl, StudentCreateViewModel model,[Bind("ID,studentID,firstName,lastName,enrollmentDate,acquiredCredits,currentSemestar,educationLevel,profilePicture")] Student student)
         {
             if (id != student.ID)
             {
                 return NotFound();
             }
+
+            StudentsController uploadImage = new StudentsController(_context, webHostingEnvironment);
+            student.profilePicture = uploadImage.UploadedFile(imageUrl);
 
             if (ModelState.IsValid)
             {
@@ -136,7 +176,7 @@ namespace University.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Details", new { id = student.ID });
             }
             return View(student);
         }
@@ -200,6 +240,23 @@ namespace University.Controllers
             return View(student);
         }
 
+        
+        //Oveloaded function UploadedFile for Edit
+        public string UploadedFile(IFormFile file)
+        {
+            string uniqueFileName = null;
+            if (file != null)
+            {
+                string uploadsFolder = Path.Combine(webHostingEnvironment.WebRootPath, "studentImages");
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(file.FileName);
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    file.CopyTo(fileStream);
+                }
+            }
+            return uniqueFileName;
+        }
 
 
 

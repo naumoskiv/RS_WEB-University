@@ -1,13 +1,14 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using University.Models;
 
-namespace University.Models
+namespace University.ViewModels
 {
-    public class Teacher
+    public class TeacherCreateViewModel
     {
         [Required]
         public int ID { get; set; }
@@ -36,11 +37,11 @@ namespace University.Models
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        [Display(Name = "Hire Date")]
+        [Display(Name = "Hire Date")] 
         public DateTime? hireDate { get; set; }
 
-        [Display(Name = "Profile Picture")]
-        public string? profilePicture { get; set; }
+        [Display(Name = "Picture")]
+        public IFormFile? Picture { get; set; }
 
         [Display(Name = "Full Name")]
         public string fullName
@@ -53,5 +54,7 @@ namespace University.Models
 
         [Display(Name = "Second Courses")]
         public ICollection<Course> secondCourses { get; set; }
+
+
     }
 }

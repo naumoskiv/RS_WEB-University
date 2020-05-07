@@ -20,6 +20,20 @@ namespace University.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<Enrollment>()
+                .HasOne<Student>(p => p.student)
+                .WithMany(p => p.Enrollments)
+                .HasForeignKey(p => p.studentID);
+            //.HasPrincipalKey(p => p.Id);
+
+            builder.Entity<Enrollment>()
+                .HasOne<Course>(p => p.course)
+                .WithMany(p => p.Enrollments)
+                .HasForeignKey(p => p.courseID);
+            //.HasPrincipalKey(p => p.Id);
+
+
+
             builder.Entity<Course>()
                 .HasOne(c => c.firstTeacher)
                 .WithMany(t => t.firstCourses)

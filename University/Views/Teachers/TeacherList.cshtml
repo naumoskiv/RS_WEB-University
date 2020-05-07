@@ -10,7 +10,10 @@
     <thead>
         <tr>
             <th>
-                Teacher
+                @Html.DisplayNameFor(model => model.profilePicture)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fullName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.degree)
@@ -29,7 +32,15 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
+
+    var photoPath = "~/images/" + (item.profilePicture ?? "blankImage.png");
         <tr>
+            <td>
+                <img src="@photoPath"
+                     class="rounded-circle"
+                     height="40" width="40"
+                     asp-append-version="true" />
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.fullName)
             </td>

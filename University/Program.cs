@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
 using University.Data;
+using University.Models;
 
 namespace University
 {
@@ -23,7 +24,7 @@ namespace University
                 try
                 {
                     var context = services.GetRequiredService<UniversityContext>();
-                    SeedData.Initialize(context);
+                    SeedData.Initialize(services);
                 }
                 catch (Exception ex)
                 {

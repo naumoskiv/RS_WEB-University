@@ -10,7 +10,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="StudentEdit">
+        <form enctype="multipart/form-data" asp-action="StudentEdit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ID" />
             <div class="form-group">
@@ -24,14 +24,28 @@
                 <span asp-validation-for="studentID" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="seminalURL" class="control-label"></label>
-                <input asp-for="seminalURL" class="form-control" />
-                <span asp-validation-for="seminalURL" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="projectURL" class="control-label"></label>
                 <input asp-for="projectURL" class="form-control" />
                 <span asp-validation-for="projectURL" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="seminalURL" class="control-label"></label>
+                @if (Model.seminalURL == null)
+                {
+                    <input type="file" name="pUrl" />
+                }
+                else
+                {
+                    <label>
+                        Selected file:
+                        <a href="@("/projects/" + Model.seminalURL)" target="_blank">
+                            @Model.seminalURL
+                        </a>
+                    </label>
+                    <input type="file" name="pUrl" />
+                }
+
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

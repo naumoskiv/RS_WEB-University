@@ -2,12 +2,16 @@
 
 @{
     ViewData["Title"] = "Details";
+    var photoPath = "~/images/" + (Model.profilePicture ?? "blankImage.png");
 }
 
-<h1>Teacher</h1>
+    <h1>Teacher @Html.DisplayFor(model => model.fullName)</h1>
 
 <div>
     <hr />
+    <img src="@photoPath"
+         height="200" width="200"
+         asp-append-version="true" />
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.firstName)

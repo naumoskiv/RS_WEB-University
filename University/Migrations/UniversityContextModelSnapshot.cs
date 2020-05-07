@@ -143,6 +143,9 @@ namespace University.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
+                    b.Property<string>("profilePicture")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("studentID")
                         .IsRequired()
                         .HasColumnType("nvarchar(10)")
@@ -184,6 +187,9 @@ namespace University.Migrations
                     b.Property<string>("officeNumber")
                         .HasColumnType("nvarchar(10)")
                         .HasMaxLength(10);
+
+                    b.Property<string>("profilePicture")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
 

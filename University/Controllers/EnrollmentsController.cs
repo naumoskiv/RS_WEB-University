@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -13,10 +16,12 @@ namespace University.Controllers
     public class EnrollmentsController : Controller
     {
         private readonly UniversityContext _context;
+        private readonly IHostingEnvironment webHostingEnvironment;
 
-        public EnrollmentsController(UniversityContext context)
+        public EnrollmentsController(UniversityContext context, IHostingEnvironment hostingEnvironment)
         {
             _context = context;
+            webHostingEnvironment = hostingEnvironment;
         }
 
         // GET: Enrollments
@@ -323,12 +328,16 @@ namespace University.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> StudentEdit(long id, [Bind("ID,courseID,studentID,semester,year,grade,seminalURL,projectURL,examPoints,seminalPoints,projectPoints,additionalPoints,finnishDate")] Enrollment enrollment)
+        public async Task<IActionResult> StudentEdit(long id, IFormFile pUrl, [Bind("ID,courseID,studentID,semester,year,grade,seminalURL,projectURL,examPoints,seminalPoints,projectPoints,additionalPoints,finnishDate")] Enrollment enrollment)
         {
             if (id != enrollment.ID)
             {
                 return NotFound();
             }
+
+            EnrollmentsController uploadUrl = new EnrollmentsController(_context, webHostingEnvironment);
+            enrollment.seminalURL = uploadUrl.UploadedFile(pUrl);
+
 
             if (ModelState.IsValid)
             {
@@ -376,7 +385,22 @@ namespace University.Controllers
             return View(enrollment);
         }
 
-
+        public string UploadedFile(IFormFile file)
+        {
+            string uniqueFileName = null;
+            if (file != null)
+            {
+                string uploadsFolder = Path.Combine(webHostingEnvironment.WebRootPath, "projects");
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(file.FileName);
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    file.CopyTo(fileStream);
+                }
+            }
+            uniqueFileName = "/projects/" + uniqueFileName;
+            return uniqueFileName;
+        }
 
 
 

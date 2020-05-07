@@ -11,6 +11,7 @@ namespace University.ViewModels
     public class EnrollmentsViewModel
     {
         public Course course { get; set; }
+        public Enrollment enrollment { get; set; }
         public IEnumerable<long> selectedStudents { get; set; }
         public IEnumerable<SelectListItem> studentList { get; set; }
 

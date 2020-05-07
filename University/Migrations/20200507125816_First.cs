@@ -19,7 +19,8 @@ namespace University.Migrations
                     enrollmentDate = table.Column<DateTime>(nullable: true),
                     acquiredCredits = table.Column<int>(nullable: true),
                     currentSemestar = table.Column<int>(nullable: true),
-                    educationLevel = table.Column<string>(maxLength: 25, nullable: true)
+                    educationLevel = table.Column<string>(maxLength: 25, nullable: true),
+                    profilePicture = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -37,7 +38,8 @@ namespace University.Migrations
                     degree = table.Column<string>(maxLength: 50, nullable: true),
                     academicRank = table.Column<string>(maxLength: 25, nullable: true),
                     officeNumber = table.Column<string>(maxLength: 10, nullable: true),
-                    hireDate = table.Column<DateTime>(nullable: true)
+                    hireDate = table.Column<DateTime>(nullable: true),
+                    profilePicture = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
