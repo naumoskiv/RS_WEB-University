@@ -40,7 +40,7 @@ namespace University.ViewModels
         [Display(Name = "Hire Date")] 
         public DateTime? hireDate { get; set; }
 
-        [Display(Name = "Picture")]
+        [Display(Name = "Profile Picture")]
         public IFormFile? Picture { get; set; }
 
         [Display(Name = "Full Name")]
