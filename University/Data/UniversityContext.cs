@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using University.Models;
 
 namespace University.Data
 {
-    public class UniversityContext : DbContext
+    public class UniversityContext : IdentityDbContext<AppUser>
     {
         public UniversityContext(DbContextOptions<UniversityContext> options) : base(options)
         {
@@ -17,9 +18,14 @@ namespace University.Data
         public DbSet<Enrollment> Enrollment { get; set; }
         public DbSet<Student> Student { get; set; }
         public DbSet<Teacher> Teacher { get; set; }
+        public DbSet<User> User { get; set; }
+        public DbSet<AppUser> AppUser { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<User>()
+                .HasNoKey();
+
             builder.Entity<Enrollment>()
                 .HasOne<Student>(p => p.student)
                 .WithMany(p => p.Enrollments)
@@ -45,6 +51,10 @@ namespace University.Data
                 .WithMany(t => t.secondCourses)
                 .HasForeignKey(c => c.secondTeacherID)
                 .OnDelete(DeleteBehavior.NoAction);
+
+
+
+            base.OnModelCreating(builder);
         }
     }
 }

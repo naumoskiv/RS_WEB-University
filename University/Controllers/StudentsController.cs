@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -26,6 +27,7 @@ namespace University.Controllers
         }
 
         // GET: Students
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index(string studentIndex, string searchString)
         {
             IQueryable<Student> students = _context.Student.AsQueryable();
@@ -74,6 +76,7 @@ namespace University.Controllers
         }
 
         // GET: Students/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
@@ -82,6 +85,7 @@ namespace University.Controllers
         // POST: Students/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(StudentCreateViewModel model)
@@ -128,6 +132,7 @@ namespace University.Controllers
         }
 
         // GET: Students/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(long? id)
         {
             if (id == null)
@@ -146,6 +151,7 @@ namespace University.Controllers
         // POST: Students/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(long id, IFormFile imageUrl, StudentCreateViewModel model,[Bind("ID,studentID,firstName,lastName,enrollmentDate,acquiredCredits,currentSemestar,educationLevel,profilePicture")] Student student)
@@ -182,6 +188,7 @@ namespace University.Controllers
         }
 
         // GET: Students/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(long? id)
         {
             if (id == null)
@@ -200,6 +207,7 @@ namespace University.Controllers
         }
 
         // POST: Students/Delete/5
+        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(long id)
@@ -211,6 +219,7 @@ namespace University.Controllers
         }
 
         // GET: Students/StudentList
+        [Authorize]
         public async Task<IActionResult> StudentList()
         {
             var universityContext = _context.Student.Include(s => s.Enrollments).ThenInclude(e => e.course);
@@ -219,6 +228,7 @@ namespace University.Controllers
 
 
         // GET: Students/StudentViewDetails/5
+        [Authorize(Roles = "Student")]
         public async Task<IActionResult> StudentViewDetails(long? id)
         {
             if (id == null)

@@ -2,17 +2,19 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome to Virtual University</h1>
-    <br />
-    <h3 class="display-4">Continue as:</h3>
-    <h4 class="display-4">
-        <a asp-controller="Home" asp-action="Admin">Admin</a>
-    </h4>
-    <h4 class="display-4">
-        <a asp-controller="Teachers" asp-action="TeacherList">Teacher</a>
-    </h4>
-    <h4 class="display-4">
-        <a asp-controller="Students" asp-action="StudentList">Student</a>
-    </h4>
-</div>
+    <div class="text-center">
+        <h1 class="display-2">Welcome to Virtual University</h1>
+        <h2 class="display-4">Please Log In</h2>
+        <br />
+        <p>If you want to use our site you need to have an account. To create one navigate to <a asp-controller="Account" asp-action="Create">/Account/Create</a></p>
+        @*<h3 class="display-4">Continue as:</h3>
+        <h4 class="display-4">
+            <a asp-controller="Home" asp-action="Admin">Admin</a>
+        </h4>
+        <h4 class="display-4">
+            <a asp-controller="Teachers" asp-action="TeacherList">Teacher</a>
+        </h4>
+        <h4 class="display-4">
+            <a asp-controller="Students" asp-action="StudentList">Student</a>
+        </h4>*@
+    </div>
